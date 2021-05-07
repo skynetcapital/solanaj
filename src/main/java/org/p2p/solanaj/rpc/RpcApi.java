@@ -155,7 +155,7 @@ public class RpcApi {
 
         Map<String, Object> parameterMap = new HashMap<>();
 
-        parameterMap.put("commitment", additionalParams.getOrDefault("commitment", "max"));
+        parameterMap.put("commitment", .getOrDefault("commitment", "max"));
         parameterMap.put("encoding", additionalParams.getOrDefault("encoding", "base64"));
 
         // No default for dataSlice
@@ -216,17 +216,29 @@ public class RpcApi {
         return result;
     }
 
-    /**
-     * Returns identity and transaction information about a confirmed block in the ledger
-     * @return
-     * @throws RpcException
-     */
-    public Block getConfirmedBlock() throws RpcException {
-        // TODO
-        return null;
+ 
+    public Block getConfirmedBlock(long slot) throws RpcException {
+
+        return getConfirmedBlock(slot,new HashMap<String,Object>()); 
     }
 
+    public Block getConfirmedBlock( long slot,  Map<String, Object> additionalParams)
+     throws RpcException {
+           
+        List<Object> params = new ArrayList<Object>();
+        params.add(slot);
 
+        Map<String, Object> parameterMap = new HashMap<>();
+
+        parameterMap.put("commitment", additionalParams.getOrDefault("commitment", "max"));
+        parameterMap.put("encoding", additionalParams.getOrDefault("encoding", "json"));
+        parameterMap.put("rewards", additionalParams.getOrDefault("rewards", true));
+        parameterMap.put("transactionDetails", additionalParams.getOrDefault("transactionDetails", "full"));
+
+        params.add(additionalParams);
+
+        return client.call("getConfirmedBlock", params, Block.class);
+    }
     /**
      * Returns information about the current epoch
      * @return
