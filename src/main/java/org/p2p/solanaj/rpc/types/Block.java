@@ -61,7 +61,7 @@ public static class Reward{
     @Json(name = "lamports")
     private long lamports;
     @Json(name = "postBalance")
-    private long postBalance;//diff between i64 and u64 in java?
+    private long postBalance;
     @Json(name = "rewardType")
     private String rewardType;
 }
@@ -140,7 +140,6 @@ public static class Message {
 
 }
 
-//**wait does this mean i don't need it to be in the constructor?? */
 public static class Transaction {
 
     @Json(name = "message")
@@ -164,19 +163,8 @@ public Meta getMeta(){
     return meta;
 }
 
-//meta too.
-    // public Block(long blockTime, String blockhash, long parentSlot,
-    //  String previousBlockhash) {
-    //      this.blockTime =blockTime;
-    //      this.blockhash = blockhash;
-    //      this.parentSlot = parentSlot;
-    //      this.previousBlockhash = previousBlockhash;
-       
-    // }
-
-    //* poorpractice? should thnk about fixing this somewhre else or will need to deal w it. Optional types not used?
     @Json(name = "blockTime")
-    private Object blockTime; // for null error?
+    private Object blockTime; 
 
     @Json(name = "blockhash")
     private String blockhash; 
@@ -196,8 +184,6 @@ public Meta getMeta(){
     //present if signatures are requested for transaction details.
     @Json(name = "signatures")
     private List<String> signatures = null;
-
-
 
     public Object getBlockTime(){
         return blockTime;
