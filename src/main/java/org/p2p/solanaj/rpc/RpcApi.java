@@ -155,7 +155,7 @@ public class RpcApi {
 
         Map<String, Object> parameterMap = new HashMap<>();
 
-        parameterMap.put("commitment", .getOrDefault("commitment", "max"));
+        parameterMap.put("commitment", additionalParams.getOrDefault("commitment", "max"));
         parameterMap.put("encoding", additionalParams.getOrDefault("encoding", "base64"));
 
         // No default for dataSlice
